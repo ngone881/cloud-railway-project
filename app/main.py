@@ -48,4 +48,5 @@ async def read_root():
     return {"message": "Bienvenue dans l'API de NgoneShop!"}
 
 if __name__ == "__main__":
-    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
+    port = int(os.getenv("PORT", 8000))  # Utilise la variable d'environnement PORT ou 8000 par défaut
+    uvicorn.run("app.main:app", host="0.0.0.0", port=port, reload=True)
