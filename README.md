@@ -35,7 +35,7 @@ The data is stored in **MongoDB Atlas**, and the application is **deployed on Ra
 
 ### `.env` file (used only locally)
 
-```env
+env
 APP_LOCAL_PORT=8000
 MONGO_USERNAME=<username>
 MONGO_PASSWORD=<password>
