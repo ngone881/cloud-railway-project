@@ -1,7 +1,156 @@
-- Créer un compte dans mongoDB Atlas
-- connecter la base de données de l'app dans mongoDB Atlas en récupérant le MONGO_URI
-- pour lancer l'application localement, il faut mettre :
-uvicorn app.main:app --reload
+# 🛍️ NgoneShop – Cloud Deployment (FastAPI + MongoDB Atlas on Railway)
 
-- ne pas oublier de mettre username et passord en variable d'environnement inchaAllah
+## 🧾 Project Description
+
+**NgoneShop** is a REST API built with **FastAPI** in Python, enabling the management of an IT product catalog for an online store.
+
+The data is stored in **MongoDB Atlas**, and the application is **deployed on Railway** using **GitHub Actions** to ensure continuous deployment (CI/CD).
+
+---
+
+## ⚙️ Tech Stack
+
+- **Backend**: FastAPI (Python 3.11)
+- **Database**: MongoDB Atlas (database `products`)
+- **CI/CD**: GitHub Actions
+- **PaaS**: Railway
+- **Deployed URL**: [https://cloud-railway-project-production.up.railway.app](https://cloud-railway-project-production.up.railway.app)
+
+---
+
+## 🗄️ MongoDB Atlas Configuration
+
+1. Create a **free cluster (M0)** at [https://www.mongodb.com/cloud/atlas](https://www.mongodb.com/cloud/atlas)
+2. Create a **database user** with:
+   - Username (`MONGO_USERNAME`)
+   - Password (`MONGO_PASSWORD`)
+3. Create a database named `products`
+4. Inside it, create a collection `products` (optional, will be auto-created)
+5. Go to **Network Access** and allow access from all IPs: 0.0.0.0/0, since Railway (on the free plan) doesn't provide a static IP address, so I can't restrict MongoDB Atlas to a specific Railway IP without a paid plan.
+6. Copy the connection URI and dynamically replace credentials in your code
+
+---
+
+## 🔐 Environment Variables
+
+### `.env` file (used only locally)
+
+```env
+APP_LOCAL_PORT=8000
+MONGO_USERNAME=<your_username>
+MONGO_PASSWORD=<your_password>
+MONGO_DB_NAME=products
+
+✅ The .env file is ignored from GitHub using .gitignore to protect sensitive information.
+
+### Environment Variables on Railway
+Add the following to Railway > Project > Variables:
+APP_LOCAL_PORT: 8000 (optional, Railway handles PORT)
+MONGO_USERNAME: same as MongoDB Atlas
+MONGO_PASSWORD: same as MongoDB Atlas
+MONGO_DB_NAME: products
+
+### 🚀 CI/CD Deployment via GitHub Actions
+1. Setup on Railway
+Create a project at https://railway.app
+Connect my GitHub repository
+Add the environment variables listed above
+Copy my RAILWAY_TOKEN from my Railway account settings
+
+### 2. GitHub Secrets
+In GitHub, go to Settings > Secrets and variables > Actions and add:
+RAILWAY_TOKEN=<my_railway_token>
+
+### 3. GitHub Actions Workflow (.github/workflows/deploy.yml)
+name: Deploy to Railway
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+
+      - name: Deploy to Railway
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: railway up --service cloud-railway-project
+
+### 4. Procfile
+web: uvicorn app.main:app --host=0.0.0.0 --port=${PORT:-8000}
+
+### 5. runtime.txt
+python-3.11
+
+### 📂 Project Structure
+.
+├── app/
+│   ├── __init__.py
+│   ├── database.py
+│   ├── main.py
+│   ├── models.py
+│   └── routes.py
+├── .github/
+│   └── workflows/
+│       └── deploy.yml
+├── .env                # not versioned (local use only)
+├── .gitignore
+├── Procfile
+├── runtime.txt
+├── requirements.txt
+└── README.md
+
+### 🔐 Security
+The .env file with sensitive data is ignored using .gitignore
+The Railway token is securely stored in GitHub Actions Secrets
+
+### ✅ Expected Result
+Each push to the main branch will trigger the GitHub Actions pipeline to:
+- Install Python dependencies
+- Automatically deploy the API to Railway
+🔗 Live App:
+https://cloud-railway-project-production.up.railway.app
+
+### 📄 API Documentation
+Swagger UI: https://cloud-railway-project-production.up.railway.app/docs
+
+Redoc: https://cloud-railway-project-production.up.railway.app/redoc
+
+### 🧪 API Features
+The API supports full CRUD operations for products.
+Example: Create a product (POST /api/products/)
+{
+  "name": "Logitech K380 Wireless Keyboard",
+  "description": "Compact Bluetooth multi-device keyboard",
+  "price": 55000,
+  "category": "peripherals",
+  "quantity": 25,
+  "in_stock": true
+}
+
+Other routes:
+GET /api/products/ – List all products
+GET /api/products/{id} – Get a single product
+PUT /api/products/{id} – Update product
+DELETE /api/products/{id} – Delete product
+➡️ All routes are testable using the Swagger interface.
 
