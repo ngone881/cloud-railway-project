@@ -1,4 +1,4 @@
-# 🛍️ NgoneShop – Cloud Deployment (FastAPI + MongoDB Atlas on Railway)
+# 🛍️ NgoneShop – Cloud Deployment with CI/CD (FastAPI + MongoDB Atlas + GitHub Actions on Railway)
 
 ## 🧾 Project Description
 
@@ -127,13 +127,12 @@ The Railway token is securely stored in GitHub Actions Secrets
 Each push to the main branch will trigger the GitHub Actions pipeline to:
 - Install Python dependencies
 - Automatically deploy the API to Railway
-🔗 Live App:
-https://cloud-railway-project-production.up.railway.app
+🔗 🔗 **Live App:**  
+[https://cloud-railway-project-production.up.railway.app](https://cloud-railway-project-production.up.railway.app)
 
-### 📄 API Documentation
-Swagger UI: https://cloud-railway-project-production.up.railway.app/docs
-
-Redoc: https://cloud-railway-project-production.up.railway.app/redoc
+### 📄 **API Documentation**
+- [Swagger UI](https://cloud-railway-project-production.up.railway.app/docs)  
+- [Redoc](https://cloud-railway-project-production.up.railway.app/redoc)
 
 ### 🧪 API Features
 The API supports full CRUD operations for products.

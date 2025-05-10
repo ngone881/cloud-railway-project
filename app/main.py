@@ -9,10 +9,6 @@ from app.database import init_db
 # Charger les variables d'environnement
 load_dotenv()
 
-# Lire les variables depuis le .env
-#mongo_uri = os.getenv("MONGO_URI")
-#mongo_db_name = os.getenv("MONGO_DB_NAME", "products")
-
 # Lire les variables depuis le fichier .env
 mongo_username = os.getenv("MONGO_USERNAME")
 mongo_password = os.getenv("MONGO_PASSWORD")
