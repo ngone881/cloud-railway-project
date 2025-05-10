@@ -57,20 +57,20 @@ MONGO_DB_NAME: products
 
 🚀 CI/CD Deployment via GitHub Actions
 
-1. Setup on Railway
+## 1. Setup on Railway
 Create a project at https://railway.app
 Connect my GitHub repository
 Add the environment variables listed above
 Copy my RAILWAY_TOKEN from my Railway account settings
 
 
-2. GitHub Secrets
+## 2. GitHub Secrets
 
 In GitHub, go to Settings > Secrets and variables > Actions and add:
 RAILWAY_TOKEN=<my_railway_token>
 
 
-3. GitHub Actions Workflow (.github/workflows/deploy.yml)
+## 3. GitHub Actions Workflow (.github/workflows/deploy.yml)
 
 name: Deploy to Railway
 
@@ -105,12 +105,12 @@ jobs:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
         run: railway up --service cloud-railway-project
 
-4. Procfile
+## 4. Procfile
 
 web: uvicorn app.main:app --host=0.0.0.0 --port=${PORT:-8000}
 
 
-5. runtime.txt
+## 5. runtime.txt
 
 python-3.11
 
@@ -132,13 +132,13 @@ python-3.11
 ├── requirements.txt
 └── README.md
 
-🔐 Security
+## 🔐 Security
 
 The .env file with sensitive data is ignored using .gitignore
 The Railway token is securely stored in GitHub Actions Secrets
 
 
-✅ Expected Result
+## ✅ Expected Result
 
 Each push to the main branch will trigger the GitHub Actions pipeline to:
 
@@ -150,11 +150,11 @@ https://cloud-railway-project-production.up.railway.app
 
 📄 API Documentation
 
-Swagger UI
+[https://cloud-railway-project-production.up.railway.app/docs](https://cloud-railway-project-production.up.railway.app/docs) 
 
-Redoc
+[https://cloud-railway-project-production.up.railway.app/redoc](https://cloud-railway-project-production.up.railway.app/redoc)
 
-🧪 API Features
+## 🧪 API Features
 The API supports full CRUD operations for products.
 Example: Create a product (POST /api/products/)
 {
