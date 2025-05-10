@@ -37,20 +37,26 @@ The data is stored in **MongoDB Atlas**, and the application is **deployed on Ra
 
 ```env
 APP_LOCAL_PORT=8000
-MONGO_USERNAME=<your_username>
-MONGO_PASSWORD=<your_password>
+MONGO_USERNAME=<username>
+MONGO_PASSWORD=<password>
 MONGO_DB_NAME=products
 
 ✅ The .env file is ignored from GitHub using .gitignore to protect sensitive information.
 
-### Environment Variables on Railway
+---
+
+## Environment Variables on Railway
+
 Add the following to Railway > Project > Variables:
 APP_LOCAL_PORT: 8000 (optional, Railway handles PORT)
 MONGO_USERNAME: same as MongoDB Atlas
 MONGO_PASSWORD: same as MongoDB Atlas
 MONGO_DB_NAME: products
 
+---
+
 ## 🚀 CI/CD Deployment via GitHub Actions
+
 1. Setup on Railway
 Create a project at https://railway.app
 Connect my GitHub repository
@@ -58,10 +64,12 @@ Add the environment variables listed above
 Copy my RAILWAY_TOKEN from my Railway account settings
 
 ## 2. GitHub Secrets
+
 In GitHub, go to Settings > Secrets and variables > Actions and add:
 RAILWAY_TOKEN=<my_railway_token>
 
 ## 3. GitHub Actions Workflow (.github/workflows/deploy.yml)
+
 name: Deploy to Railway
 
 on:
@@ -96,9 +104,11 @@ jobs:
         run: railway up --service cloud-railway-project
 
 ## 4. Procfile
+
 web: uvicorn app.main:app --host=0.0.0.0 --port=${PORT:-8000}
 
 ## 5. runtime.txt
+
 python-3.11
 
 ## 📂 Project Structure 
@@ -120,10 +130,12 @@ python-3.11
 └── README.md
 
 ## 🔐 Security
+
 The .env file with sensitive data is ignored using .gitignore
 The Railway token is securely stored in GitHub Actions Secrets
 
 ### ✅ Expected Result
+
 Each push to the main branch will trigger the GitHub Actions pipeline to:
 
 - Install Python dependencies  
