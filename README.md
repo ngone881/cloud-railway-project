@@ -155,8 +155,12 @@ https://cloud-railway-project-production.up.railway.app
 [https://cloud-railway-project-production.up.railway.app/redoc](https://cloud-railway-project-production.up.railway.app/redoc)
 
 ## 🧪 API Features
+
 The API supports full CRUD operations for products.
-Example: Create a product (POST /api/products/)
+
+**Example: Create a product (POST /api/products/)**
+
+```json
 {
   "name": "Logitech K380 Wireless Keyboard",
   "description": "Compact Bluetooth multi-device keyboard",
@@ -165,11 +169,19 @@ Example: Create a product (POST /api/products/)
   "quantity": 25,
   "in_stock": true
 }
+```
 
 Other routes:
-GET /api/products/ – List all products
-GET /api/products/{id} – Get a single product
-PUT /api/products/{id} – Update product
-DELETE /api/products/{id} – Delete product
-➡️ All routes are testable using the Swagger interface.
+
+- GET /api/products/ – List all products
+
+- GET /api/products/{id} – Get a single product
+
+- PUT /api/products/{id} – Update product
+
+- DELETE /api/products/{id} – Delete product
+
+- ➡️ All routes are testable using the Swagger interface.
+
+
 
