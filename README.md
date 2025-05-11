@@ -115,22 +115,22 @@ web: uvicorn app.main:app --host=0.0.0.0 --port=${PORT:-8000}
 python-3.11
 
 ## 📂 Project Structure 
-- .
-- ├── app/
-- │   ├── __init__.py
-- │   ├── database.py
-- │   ├── main.py
-- │   ├── models.py
-- │   └── routes.py
-- ├── .github/
-- │   └── workflows/
-- │       └── deploy.yml
-- ├── .env                # not versioned (local use only)
-- ├── .gitignore
-- ├── Procfile
-- ├── runtime.txt
-- ├── requirements.txt
-- └── README.md
+    .
+    ├── app/
+    │   ├── __init__.py
+    │   ├── database.py
+    │   ├── main.py
+    │   ├── models.py
+    │   └── routes.py
+    ├── .github/
+    │   └── workflows/
+    │       └── deploy.yml
+    ├── .env                # not versioned (local use only)
+    ├── .gitignore
+    ├── Procfile
+    ├── runtime.txt
+    ├── requirements.txt
+    └── README.md
 
 ## 🔐 Security
 
