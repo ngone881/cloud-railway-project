@@ -48,10 +48,10 @@ MONGO_DB_NAME=products
 Environment Variables on Railway
 
 Add the following to Railway > Project > Variables:
-APP_LOCAL_PORT: 8000 (optional, Railway handles PORT)
-MONGO_USERNAME: same as MongoDB Atlas
-MONGO_PASSWORD: same as MongoDB Atlas
-MONGO_DB_NAME: products
+- APP_LOCAL_PORT: 8000 (optional, Railway handles PORT)
+- MONGO_USERNAME: same as MongoDB Atlas
+- MONGO_PASSWORD: same as MongoDB Atlas
+- MONGO_DB_NAME: products
 
 ---
 
@@ -72,38 +72,38 @@ RAILWAY_TOKEN=<my_railway_token>
 
 ## 3. GitHub Actions Workflow (.github/workflows/deploy.yml)
 
-name: Deploy to Railway
+    name: Deploy to Railway
 
-on:
-  push:
-    branches:
-      - main
+    on:
+    push:
+        branches:
+        - main
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+    jobs:
+    deploy:
+        runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+        steps:
+        - name: Checkout code
+            uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
+        - name: Set up Python
+            uses: actions/setup-python@v4
+            with:
+            python-version: '3.11'
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+        - name: Install dependencies
+            run: |
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
 
-      - name: Install Railway CLI
-        run: npm install -g @railway/cli
+        - name: Install Railway CLI
+            run: npm install -g @railway/cli
 
-      - name: Deploy to Railway
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        run: railway up --service cloud-railway-project
+        - name: Deploy to Railway
+            env:
+            RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+            run: railway up --service cloud-railway-project
 
 ## 4. Procfile
 
