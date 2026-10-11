@@ -1,19 +1,19 @@
-# 🛍️ NgoneShop – Cloud Deployment with CI/CD (FastAPI + MongoDB Atlas + GitHub Actions on Railway)
+# 🛍️ NgoneShop – Cloud Deployment (FastAPI + MongoDB Atlas + Railway)
 
 ## 🧾 Project Description
 
 **NgoneShop** is a REST API built with **FastAPI** in Python, enabling the management of an IT product catalog for an online store.
 
-The data is stored in **MongoDB Atlas**, and the application is **deployed on Railway** using **GitHub Actions** to ensure continuous deployment (CI/CD).
+The data is stored in **MongoDB Atlas**, and the application is **deployed on Railway** via Railway's **native GitHub integration**, which automatically redeploys the API on every push to the `main` branch.
 
 ---
 
 ## ⚙️ Tech Stack
 
 - **Backend**: FastAPI (Python 3.11)
-- **Database**: MongoDB Atlas (database `products`)
-- **CI/CD**: GitHub Actions
-- **PaaS**: Railway
+- **Database**: MongoDB Atlas — base de données MongoDB hébergée et gérée dans le cloud (database `products`)
+- **CI/CD**: Déploiement continu via l'intégration GitHub native de Railway
+- **PaaS**: Railway (plateforme de déploiement cloud, similaire à Heroku/Render)
 - **Deployed URL**: [https://cloud-railway-project-production.up.railway.app](https://cloud-railway-project-production.up.railway.app)
 
 ---
@@ -55,7 +55,11 @@ Add the following to Railway > Project > Variables:
 
 ---
 
-🚀 CI/CD Deployment via GitHub Actions
+🚀 Déploiement automatique via Railway
+
+Railway est connecté directement à ce dépôt via son **intégration GitHub native** (l'app GitHub "railway-app"). Railway surveille la branche `main` et redéploie automatiquement l'API à chaque push, sans intervention d'un pipeline GitHub Actions.
+
+Le dépôt contient également un workflow GitHub Actions (décrit ci-dessous) correspondant à une configuration CI/CD alternative, syntaxiquement valide. ⚠️ Cependant, ce workflow n'a jamais été déclenché (0 exécution dans l'onglet Actions du dépôt) : **il ne s'agit pas du mécanisme utilisé pour les déploiements réels**, qui passent exclusivement par l'intégration Railway-GitHub décrite ci-dessus. Les étapes suivantes sont conservées à titre de documentation technique.
 
 ## 1. Setup on Railway
 Create a project at https://railway.app
@@ -64,13 +68,13 @@ Add the environment variables listed above
 Copy my RAILWAY_TOKEN from my Railway account settings
 
 
-## 2. GitHub Secrets
+## 2. GitHub Secrets (configuration CI/CD non utilisée pour le déploiement actif)
 
 In GitHub, go to Settings > Secrets and variables > Actions and add:
 RAILWAY_TOKEN=<my_railway_token>
 
 
-## 3. GitHub Actions Workflow (.github/workflows/deploy.yml)
+## 3. GitHub Actions Workflow (.github/workflows/deploy.yml) — non déclenché, non utilisé pour le déploiement réel
 
     name: Deploy to Railway
 
@@ -140,10 +144,9 @@ The Railway token is securely stored in GitHub Actions Secrets
 
 ## ✅ Expected Result
 
-Each push to the main branch will trigger the GitHub Actions pipeline to:
+Each push to the `main` branch is automatically picked up by **Railway's native GitHub integration**, which rebuilds and redeploys the API to Railway — no GitHub Actions pipeline is involved in this process.
 
-- Install Python dependencies  
-- Automatically deploy the API to Railway  
+⚠️ Démo live actuellement indisponible (crédit d'essai Railway expiré). Le code reste consultable et fonctionnel en local (voir section Installation).
 
 🔗 Live App: 
 https://cloud-railway-project-production.up.railway.app
