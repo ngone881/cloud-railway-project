@@ -59,7 +59,7 @@ Add the following to Railway > Project > Variables:
 
 Railway est connecté directement à ce dépôt via son **intégration GitHub native** (l'app GitHub "railway-app"). Railway surveille la branche `main` et redéploie automatiquement l'API à chaque push, sans intervention d'un pipeline GitHub Actions.
 
-Le dépôt contient également un workflow GitHub Actions (décrit ci-dessous) correspondant à une configuration CI/CD alternative, syntaxiquement valide. ⚠️ Cependant, ce workflow n'a jamais été déclenché (0 exécution dans l'onglet Actions du dépôt) : **il ne s'agit pas du mécanisme utilisé pour les déploiements réels**, qui passent exclusivement par l'intégration Railway-GitHub décrite ci-dessus. Les étapes suivantes sont conservées à titre de documentation technique.
+Le dépôt contient également un workflow GitHub Actions (décrit ci-dessous) correspondant à une configuration CI/CD alternative, syntaxiquement valide, qui se déclenche bien sur chaque push. ⚠️ Son premier run (#24) a cependant échoué, probablement en raison de l'absence de crédit Railway actif sur le compte. Quoi qu'il en soit, **il ne s'agit pas du mécanisme utilisé pour les déploiements réels** : les déploiements historiques visibles dans l'onglet Deployments de Railway (25 au total) ont tous été effectués via l'intégration Railway-GitHub native décrite ci-dessus, indépendamment de ce workflow. Les étapes suivantes sont conservées à titre de documentation technique.
 
 ## 1. Setup on Railway
 Create a project at https://railway.app
@@ -74,7 +74,7 @@ In GitHub, go to Settings > Secrets and variables > Actions and add:
 RAILWAY_TOKEN=<my_railway_token>
 
 
-## 3. GitHub Actions Workflow (.github/workflows/deploy.yml) — non déclenché, non utilisé pour le déploiement réel
+## 3. GitHub Actions Workflow (.github/workflows/deploy.yml) — se déclenche sur push, mais non utilisé pour le déploiement réel
 
     name: Deploy to Railway
 
