@@ -4,6 +4,8 @@
 
 **NgoneShop** is a REST API built with **FastAPI** in Python, enabling the management of an IT product catalog for an online store.
 
+Ce projet a été réalisé dans le cadre du module Cloud/DevOps à l'École Polytechnique de Thiès (2024-2025), sous la supervision du Pr. Ibrahima Mbengue.
+
 The data is stored in **MongoDB Atlas**, and the application is **deployed on Railway** via Railway's **native GitHub integration**, which automatically redeploys the API on every push to the `main` branch.
 
 ---
